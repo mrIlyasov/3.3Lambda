@@ -31,7 +31,6 @@ class Chat(val id: Int, val owner: User, val receiver: User, var unread: Boolean
             return null
         }
         messageToReturn = filteredMessages[0]
-        println(messageToReturn)
         return messageToReturn
     }
 

@@ -8,8 +8,6 @@ data class Message(
 ) {
 
 
-
-
     override fun toString(): String {
         if (incomming)
             return "входящее: $text "
