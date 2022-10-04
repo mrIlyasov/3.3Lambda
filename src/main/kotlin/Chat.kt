@@ -108,7 +108,7 @@ class Chat(val id: Int, val owner: User, val receiver: User, var unread: Boolean
     }
 
     override fun toString(): String {
-        return "$id, пользователь: $owner, c кем чатится: $receiver"
+        return "$id, пользователь: $owner, c кем чатится: $receiver, ${this.unread}"
     }
 
 

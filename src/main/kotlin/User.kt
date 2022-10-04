@@ -22,13 +22,12 @@ data class User(val id: Int, var name: String) {
         }
         if (chatToReturn == null) {
             chatToReturn = newChatWithUser(user)
-
         }
         return chatToReturn
     }
 
     fun newChatWithUser(user: User): Chat {
-        chats.add(Chat(this.chats.size + 1, owner = this, receiver = user))
+        chats.add(Chat(this.chats.size + 1, owner = this, receiver = user, unread = true))
         return chats.last()
     }
 

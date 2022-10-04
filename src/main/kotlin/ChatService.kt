@@ -14,18 +14,17 @@ object ChatService {
     }
 
     fun addUser(user: User) {
-        users += user.copy(id = users.size + 1)
+        if (users.size > 0) users += user.copy(id = users.last().id + 1)
+        else users += user.copy(id = 1)
     }
 
     fun printUsers() {
-        for (index in users.indices) {
-            println(users[index])
-        }
+        users.forEach { println(it) }
     }
 
 
     fun getChatsOfUser(userId: Int): List<Chat> {
-        var user = users.find {  it.id == userId }
+        var user = users.find { it.id == userId }
         var chats = mutableListOf<Chat>()
         if (user != null) {
             if (user.chats.size > 0) {
@@ -37,7 +36,7 @@ object ChatService {
 
     fun getUnreadChatsOfUser(userId: Int): List<Chat> {
         var unreadChats: List<Chat> = emptyList()
-        var user = users.find {  it.id == userId }
+        var user = users.find { it.id == userId }
         if (user != null) {
             unreadChats = user.chats.filter { chat -> chat.unread == true }
         }
@@ -49,16 +48,21 @@ object ChatService {
 
 
     fun sendMessage(senderId: Int, receiverId: Int, text: String) {
-        var sender = users.find {  it.id == senderId }
-        var receiver = users.find {  it.id == receiverId }
+        var sender = users.find { it.id == senderId }
+        var receiver = users.find { it.id == receiverId }
         if (sender != null && receiver != null) {
+            var receiverChat = receiver.findChatWithUser(sender)
+            receiverChat.unread = true
+            println(receiverChat)
             sender.sendMessage(receiver, text)
+
+
         }
     }
 
     fun getChatById(userId: Int, receiverId: Int): Chat? {
         var chat: Chat? = null
-        var user = users.find {  it.id == userId }
+        var user = users.find { it.id == userId }
         var receiver = findUserById(receiverId)
         if (user != null && receiver != null) {
             chat = user.findChatWithUser(receiver)
@@ -68,8 +72,8 @@ object ChatService {
 
     fun readChatById(userId: Int, receiverId: Int) {
         var chat: Chat
-        var user = users.find {  it.id == userId }
-        var receiver = users.find {  it.id == receiverId }
+        var user = users.find { it.id == userId }
+        var receiver = users.find { it.id == receiverId }
         if (user != null && receiver != null) {
             chat = user.findChatWithUser(receiver)
             if (chat != null)
