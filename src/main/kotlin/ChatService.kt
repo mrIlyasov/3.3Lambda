@@ -53,10 +53,7 @@ object ChatService {
         if (sender != null && receiver != null) {
             var receiverChat = receiver.findChatWithUser(sender)
             receiverChat.unread = true
-            println(receiverChat)
             sender.sendMessage(receiver, text)
-
-
         }
     }
 
@@ -91,6 +88,12 @@ object ChatService {
                 message.unread = false
             }
         }
+    }
+
+
+    fun clear(){
+        var emptyMutableList = mutableListOf<User>()
+        this.users = emptyMutableList
     }
 
 }

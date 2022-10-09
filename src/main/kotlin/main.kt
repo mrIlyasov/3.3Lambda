@@ -13,12 +13,12 @@ fun main() {
     println()
 
     println(service.getUnreadChatsOfUser(1))
-/*
+
     val chat = service.getChatById(1, 2)
     chat!!.deleteMessage(1)
     chat.editMessage(2, "Petya пишет Vasye 1 исправлено")
     chat.printMessages()
-    println()*/
+    println()
 
 
 }
