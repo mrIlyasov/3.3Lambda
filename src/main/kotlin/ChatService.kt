@@ -5,11 +5,9 @@ object ChatService {
     fun findUserById(id: Int): User? {
         var user: User? = null
         if (users.size > 0) {
-            for (index in users.indices) {
-                if (id == users[index].id)
-                    user = users[index]
-            }
+            user = users.find { it.id == id }
         }
+
         return user
     }
 
@@ -75,7 +73,7 @@ object ChatService {
             chat = user.findChatWithUser(receiver)
             if (chat != null) {
                 user.readChat(chat)
-                    chat.messages.filter { it.receiver == receiver }.asSequence().forEach { it.unread = false }
+                chat.messages.filter { it.receiver == receiver }.asSequence().forEach { it.unread = false }
             } else println("Чат не найден")
         }
     }
