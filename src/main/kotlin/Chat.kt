@@ -25,12 +25,7 @@ class Chat(val id: Int, val owner: User, val receiver: User, var unread: Boolean
 
 
     fun findMessage(id: Int): Message? {
-        var messageToReturn: Message
-        val filteredMessages = messages.filter { message -> message.id == id }
-        if (filteredMessages.size == 0) {
-            return null
-        }
-        messageToReturn = filteredMessages[0]
+        val messageToReturn = messages.find { it.id == id }
         return messageToReturn
     }
 
@@ -96,8 +91,8 @@ class Chat(val id: Int, val owner: User, val receiver: User, var unread: Boolean
 
     fun printMessages() {
         println("Вы: ${owner.name} чатитесь с: ${receiver.name}")
-       val printableMessages =  messages.map { it.text }
-           .joinToString(separator = "\n")
+        val printableMessages = messages.map { it.text }
+            .joinToString(separator = "\n")
         println(printableMessages)
     }
 
