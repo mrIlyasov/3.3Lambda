@@ -37,11 +37,7 @@ class Chat(val id: Int, val owner: User, val receiver: User, var unread: Boolean
 
     fun findMessageIndex(id: Int): Int? {
         var indexToReturn: Int? = null
-        for (index in messages.indices) {
-            if (id == messages[index].id) {
-                indexToReturn = index
-            }
-        }
+        indexToReturn = messages.find { it.id == id }?.id
         return indexToReturn
     }
 
@@ -100,11 +96,9 @@ class Chat(val id: Int, val owner: User, val receiver: User, var unread: Boolean
 
     fun printMessages() {
         println("Вы: ${owner.name} чатитесь с: ${receiver.name}")
-        if (messages.size > 0) {
-            for (index in messages.indices) {
-                println(messages[index].toString())
-            }
-        }
+       val printableMessages =  messages.map { it.text }
+           .joinToString(separator = "\n")
+        println(printableMessages)
     }
 
     override fun toString(): String {

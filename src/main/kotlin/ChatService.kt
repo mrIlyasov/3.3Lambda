@@ -73,9 +73,10 @@ object ChatService {
         var receiver = users.find { it.id == receiverId }
         if (user != null && receiver != null) {
             chat = user.findChatWithUser(receiver)
-            if (chat != null)
+            if (chat != null) {
                 user.readChat(chat)
-            else println("Чат не найден")
+                    chat.messages.filter { it.receiver == receiver }.asSequence().forEach { it.unread = false }
+            } else println("Чат не найден")
         }
     }
 
@@ -91,7 +92,7 @@ object ChatService {
     }
 
 
-    fun clear(){
+    fun clear() {
         var emptyMutableList = mutableListOf<User>()
         this.users = emptyMutableList
     }
