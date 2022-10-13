@@ -8,7 +8,6 @@ data class User(val id: Int, var name: String) {
     fun sendMessage(receiver: User, text: String) {
         var chat: Chat = findChatWithUser(receiver)
         chat.addMessage(text)
-        val message = chat.messages.last()
     }
 
 
@@ -34,9 +33,8 @@ data class User(val id: Int, var name: String) {
 
     fun readChat(chat: Chat) {
         chat.unread = false
-        for (index in chat.messages.indices) {
-            chat.messages[index].unread = false
-        }
+        chat.messages.asSequence().filter { it.sender == chat.owner }
+            .forEach { it.unread = false }
     }
 
 

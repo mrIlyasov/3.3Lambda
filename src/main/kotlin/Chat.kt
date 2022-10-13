@@ -25,8 +25,7 @@ class Chat(val id: Int, val owner: User, val receiver: User, var unread: Boolean
 
 
     fun findMessage(id: Int): Message? {
-        val messageToReturn = messages.find { it.id == id }
-        return messageToReturn
+        return  messages.find { it.id == id }
     }
 
 

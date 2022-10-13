@@ -7,7 +7,6 @@ object ChatService {
         if (users.size > 0) {
             user = users.find { it.id == id }
         }
-
         return user
     }
 
@@ -49,8 +48,7 @@ object ChatService {
         var sender = users.find { it.id == senderId }
         var receiver = users.find { it.id == receiverId }
         if (sender != null && receiver != null) {
-            var receiverChat = receiver.findChatWithUser(sender)
-            receiverChat.unread = true
+            receiver.chats.find { it.receiver == receiver }?.unread=true
             sender.sendMessage(receiver, text)
         }
     }
