@@ -5,10 +5,7 @@ object ChatService {
     fun findUserById(id: Int): User? {
         var user: User? = null
         if (users.size > 0) {
-            for (index in users.indices) {
-                if (id == users[index].id)
-                    user = users[index]
-            }
+            user = users.find { it.id == id }
         }
         return user
     }
@@ -51,8 +48,7 @@ object ChatService {
         var sender = users.find { it.id == senderId }
         var receiver = users.find { it.id == receiverId }
         if (sender != null && receiver != null) {
-            var receiverChat = receiver.findChatWithUser(sender)
-            receiverChat.unread = true
+            receiver.chats.find { it.receiver == receiver }?.unread=true
             sender.sendMessage(receiver, text)
         }
     }
@@ -73,9 +69,10 @@ object ChatService {
         var receiver = users.find { it.id == receiverId }
         if (user != null && receiver != null) {
             chat = user.findChatWithUser(receiver)
-            if (chat != null)
+            if (chat != null) {
                 user.readChat(chat)
-            else println("Чат не найден")
+                chat.messages.filter { it.receiver == receiver }.asSequence().forEach { it.unread = false }
+            } else println("Чат не найден")
         }
     }
 
@@ -91,7 +88,7 @@ object ChatService {
     }
 
 
-    fun clear(){
+    fun clear() {
         var emptyMutableList = mutableListOf<User>()
         this.users = emptyMutableList
     }

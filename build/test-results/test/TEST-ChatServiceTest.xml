@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ChatServiceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-10-11T10:08:05" hostname="HOME-PC" time="0.011">
+  <properties/>
+  <testcase name="findUserById" classname="ChatServiceTest" time="0.009"/>
+  <testcase name="readChatById" classname="ChatServiceTest" time="0.001"/>
+  <testcase name="readMessage" classname="ChatServiceTest" time="0.0"/>
+  <testcase name="sendMessage" classname="ChatServiceTest" time="0.0"/>
+  <testcase name="readMessagesInReadChat" classname="ChatServiceTest" time="0.0"/>
+  <testcase name="getUnreadChatsOfUser" classname="ChatServiceTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
